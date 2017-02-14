@@ -19,88 +19,15 @@ export function changeActiveName(activeName) {
     };
 }
 
-export function getUser(name) {
-    const req = new Request('https://api.github.com/users/' + name);
-    return {
-        type: [
-            USER_REQUEST,
-            USER_INFO_SUCCESS,
-            USER_FAILURE,
-        ],
-        promise: fetch(req)
-            .then(res => res.json())
-            .then(res => res)
-    };
-}
+const builldUserAction =  (pattern, success, fail) => name => ({ type: USER_REQUEST, name, url: `https://api.github.com/users/${name}${pattern}`,success, fail, isFetching:true  });
 
-export function getUserRep(name) {
-    const req = new Request('https://api.github.com/users/' + name + '/repos');
-    return {
-        type: [
-            USER_REQUEST,
-            USER_REP_SUCCESS,
-            USER_FAILURE,
-        ],
-        promise: fetch(req)
-            .then(res => res.json())
-            .then(res => res)
-    };
-}
 
-export function getUserStars(name) {
-    const req = new Request('https://api.github.com/users/' + name + '/starred');
-    return {
-        type: [
-            USER_REQUEST,
-            USER_STARS_SUCCESS,
-            USER_FAILURE,
-        ],
-        promise: fetch(req)
-            .then(res => res.json())
-            .then(res => res)
-    };
-}
+export const getUser = builldUserAction('', USER_INFO_SUCCESS, USER_FAILURE);
 
-export function getUserFollowers(name) {
-    const req = new Request('https://api.github.com/users/' + name + '/followers');
-    return {
-        type: [
-            USER_REQUEST,
-            USER_FOLLOWERS_SUCCESS,
-            USER_FAILURE,
-        ],
-        promise: fetch(req)
-            .then(res => res.json())
-            .then(async(res) => {
-                const getFol = res.map(r => {
-                    return fetch(r.url)
-                        .then(_res => _res.json())
-                        .then(_res => _res);
-                });
-                const result = await Promise.all(getFol);
-                return result;
-            })
-    };
-}
+export const getUserRep = builldUserAction('/repos', USER_REP_SUCCESS, USER_FAILURE);
 
-export function getUserFollowings(name) {
-    const req = new Request('https://api.github.com/users/' + name + '/following');
-    return {
-        type: [
-            USER_REQUEST,
-            USER_FOLLOWINGS_SUCCESS,
-            USER_FAILURE,
-        ],
-        promise: fetch(req)
-            .then(res => res.json())
-            .then(async(res) => {
-                const getFol = res.map(r => {
-                    return fetch(r.url)
-                        .then(_res => _res.json())
-                        .then(_res => _res);
-                });
-                const result = await Promise.all(getFol);
-                return result;
-            })
-    };
-}
+export const getUserStars = builldUserAction('/starred', USER_STARS_SUCCESS, USER_FAILURE);
+
+export const getUserFollowers = builldUserAction('/followers', USER_FOLLOWERS_SUCCESS, USER_FAILURE);
+
+export const getUserFollowings = builldUserAction('/following', USER_FOLLOWINGS_SUCCESS, USER_FAILURE);

@@ -8,7 +8,7 @@ const paths = {
     src: path.join(__dirname, '../src'),
     components: path.join(__dirname, '../src/components'),
     store: path.join(__dirname, '../src/store'),
-    reducers: path.join(__dirname, '../src/reducers'),
+    root: path.join(__dirname, '../src/root'),
     routes: path.join(__dirname, '../src/routes'),
     common: path.join(__dirname, '../src/common'),
     localStore: path.join(__dirname, '../node_modules/store/store.js'),
@@ -76,16 +76,7 @@ const config = {
 
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        alias: {
-            'src': paths.src,
-            'components': paths.components,
-            'store': paths.store,
-            'reducers': paths.reducers,
-            'routes': paths.routes,
-            'common': paths.common,
-            'localStore': paths.localStore,
-            'middleware': paths.middleware,
-        }
+        alias: Object.assign({}, paths)
     },
 };
 

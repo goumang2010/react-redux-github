@@ -30,7 +30,6 @@ export default (state = initialState, action) => {
         case SEARCH_SUCCESS:
             let totalPages,
                 result = action.result;
-
             if (result.totalCount === result.items.length) {
                 totalPages = 1;
             } else {

@@ -1,18 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
 // import Thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
-import reducers from 'reducers';
+import { rootReducer, rootEpic } from 'root';
 import DevTools from 'src/DevTools';
-import promiseMiddleware from 'middleware/promiseMiddleware';
 
 const routeMiddleware = routerMiddleware(browserHistory);
+const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const middleware = [
     // Thunk,
     routeMiddleware,
-    promiseMiddleware,
+    epicMiddleware
 ];
 
 const enhancer = compose(
@@ -28,5 +29,5 @@ function getDebugSessionKey() {
 }
 
 export default function configureStore(initialState) {
-    return createStore(reducers, initialState, enhancer);
+    return createStore(rootReducer, initialState, enhancer);
 };

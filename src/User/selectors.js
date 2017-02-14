@@ -72,6 +72,7 @@ export function mapDispatchToProps(dispatch) {
             dispatch(changeActiveName(activeName));
         },
         getUser(name) {
+            console.log(name);
             dispatch(getUser(name));
         },
         getUserRep(name) {
