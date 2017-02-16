@@ -13,10 +13,12 @@ const {
     LOGIN_HIDE
 } = actionTypes;
 
+let storedAuthorization = localStorage.getItem('authorization');
+
 const initialState = Map({
     userInfo: Map(),
-    authorization: '',
-    show: true,
+    authorization: storedAuthorization,
+    show: !storedAuthorization,
     error: ''
 });
 
@@ -28,6 +30,7 @@ export default (state = initialState, action) => {
             let result = action.result;
             console.log(result);
             // save authorization
+            localStorage.setItem('authorization', result.authorization);
             return state
                 .set('userInfo', toImmutable(result.userInfo))
                 .set('authorization', result.authorization)
