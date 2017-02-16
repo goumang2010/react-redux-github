@@ -20,5 +20,6 @@ module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').m
     },
     output:{
         publicPath:'/static/',
-    }
+    },
+    debug: true
 });

@@ -47,6 +47,8 @@ export default (state = initialState, action) => {
                 .set('totalPages', 0)
                 .set('resetPage', true);
         case SEARCH_FAILURE:
+            console.log(`search error:`)
+            console.log(action.error);
             return state.set('error', action.error);
         default:
             return state;

@@ -6,6 +6,7 @@ const px2rem = require('postcss-px2rem');
 
 const paths = {
     src: path.join(__dirname, '../src'),
+    modules: path.join(__dirname, '../src/modules'),
     components: path.join(__dirname, '../src/components'),
     store: path.join(__dirname, '../src/store'),
     root: path.join(__dirname, '../src/root'),

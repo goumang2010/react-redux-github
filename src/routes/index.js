@@ -7,13 +7,13 @@ import rootNode from './rootNode';
 
 const search = (location, callback) => {
   require.ensure([], require => {
-    callback(null, require('src/Search/containers.js').default);
+    callback(null, require('modules/Search/containers.js').default);
   }, 'search');
 };
 
 const user = (location, callback) => {
   require.ensure([], require => {
-    callback(null, require('src/User/containers.js').default);
+    callback(null, require('modules/User/containers.js').default);
   }, 'user');
 };
 

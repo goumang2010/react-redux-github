@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
 import { rootReducer, rootEpic } from 'root';
-import DevTools from 'src/DevTools';
+import DevTools from 'modules/DevTools';
 
 const routeMiddleware = routerMiddleware(browserHistory);
 const epicMiddleware = createEpicMiddleware(rootEpic);

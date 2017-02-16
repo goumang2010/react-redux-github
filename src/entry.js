@@ -6,7 +6,8 @@ import { Router, hashHistory, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from 'routes';
 import configureStore from 'store/configureStore';
-import DevTools from 'src/DevTools';
+import DevTools from 'modules/DevTools';
+import Login from 'modules/Login/containers';
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ store.subscribe(() => {
 ReactDOM.render(
     <Provider store={store}>
         <div className='entry-wrap'>
+            <Login></Login>
             <Router
                 history={history}
                 routes={routes} />
