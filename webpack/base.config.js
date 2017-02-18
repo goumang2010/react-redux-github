@@ -27,9 +27,9 @@ const config = {
 
     output: {
         path: path.join(__dirname, '../dist'),
-        filename: '[name].js',
-        sourceMapFilename: '[file].map',
-        chunkFilename: '[name].[chunkhash:5].chunk.js',
+        filename: 'static/js/[name].js',
+        sourceMapFilename: 'static/js/[file].map',
+        chunkFilename: 'static/js/[name].[chunkhash:5].chunk.js',
     },
 
     plugins: [
