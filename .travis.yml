@@ -1,4 +1,16 @@
 language: node_js
-node_js:
-  - "iojs"
-bundler_args: --retry 6
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+  
+script:
+  - npm run publish
+
+branches:
+  only:
+    - master
+env:
+ global:
+   - GH_REF: github.com/goumang2010/react-redux-github.git
