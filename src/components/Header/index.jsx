@@ -53,11 +53,13 @@ class Header extends React.Component {
 
                         <div className='center'>
                             {
-                                center.icon ?
+                                center.icon &&
                                     <Icon
                                         name={center.icon}
                                         style={center.size ? center.size : iconSize} />
-                                    : center.text
+                            }
+                            {
+                                center.text && <span>{center.text}</span>
                             }
                         </div>
 
