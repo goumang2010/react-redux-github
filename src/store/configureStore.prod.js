@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { rootReducer, rootEpic } from 'root';
 import { createEpicMiddleware } from 'redux-observable';
 
-const routeMiddleware = routerMiddleware(browserHistory);
+const routeMiddleware = routerMiddleware(hashHistory);
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const middleware = [
