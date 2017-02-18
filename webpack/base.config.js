@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const px2rem = require('postcss-px2rem');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const paths = {
     src: path.join(__dirname, '../src'),
@@ -32,6 +33,10 @@ const config = {
     },
 
     plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './index/index.html'
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     ],

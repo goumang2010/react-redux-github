@@ -28,7 +28,7 @@ function git(command) {
     let args = command.split(/\s+/);
     if (args.shift() !== 'git') {
         let err = 'You must input the git command';
-        console.error(err);
+        logger.fatal(err);
         return Promise.reject(err);
     } else {
         console.log('Ready to execute: ' + command);
@@ -99,31 +99,36 @@ function makeSubtree() {
 	try {
 		cleanSubtree();
         spinner.stop();
-		return git('git subtree add -P dist ' + args.repo.url + '/' + args.repo.branch);
+		return git('git subtree add -P dist ' + args.repo.url + '/' + args.repo.branch)
+        .catch((err) => {
+            spinner.stop();
+            logger.log('error happened: ' + err.message);
+            if (err.message.indexOf('does not refer to a commit') !== -1) {
+                execSync(`git subtree add -P dist HEAD`);
+                return cleanSubtree();
+            } else {
+                return Promise.resolve('Subtree may has been established');
+            }
+        });
 	} catch (err) {
         spinner.stop();
-		console.error('error happened: ' + err.message);
-		if (err.message.indexOf('does not refer to a commit') !== -1) {
-			execSync(`git subtree add -P dist HEAD --squash`);
-			cleanSubtree();
-		} else {
-            return Promise.reject('Can not establish suntree');
-		}
+        return Promise.resolve('Subtree may has been established');
 	}
 	
 }
 
 function buildWeb() {
     return exec('npm run build')
-    .then(() => Promise.all([write(path.join(dirpath, './CNAME'), "sql.chuune.cn"),
+    .then(() => Promise.all([write(path.join(dirpath, './CNAME'), "github.chuune.cn"),
     write(path.join(dirpath, './TIMESTAMP'), Date.now())]))
 }
 
 function pushToGhPage() {
     return git('git add --all -f dist')
     .then(() => git('git commit -m build-gitpage'))
-    .then(() => git('git subtree push -P builds/web ' + args.repo.url + ' ' + args.repo.branch))
+    .then(() => git('git subtree push -P dist ' + args.repo.url + ' ' + args.repo.branch))
 }
 
 
 setGit().then(() => makeSubtree()).then(() => buildWeb()).then(() => pushToGhPage())
+.catch(err => logger.log(err));
