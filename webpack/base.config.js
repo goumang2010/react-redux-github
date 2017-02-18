@@ -67,16 +67,32 @@ const config = {
             },
             //file
             {
-                test: /\.(jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot)$/,
-                loader: 'file-loader'
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url',
+                query: {
+                    limit: 10000,
+                    name: 'static/img/[name].[hash:7].[ext]'
+                }
             },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url',
+                query: {
+                    limit: 10000,
+                    name: 'static/fonts/[name].[hash:7].[ext]'
+                }
+            }
         ]
     },
 
     postcss() {
         return [
-            autoprefixer({ browsers: ['last 7 versions'] }),
-            px2rem({ remUnit: 75 }),
+            autoprefixer({
+                browsers: ['last 7 versions']
+            }),
+            px2rem({
+                remUnit: 75
+            }),
         ];
     },
 
