@@ -1,4 +1,4 @@
-# React Redux Github [![Build Status](https://travis-ci.org/FAOfao931013/react-redux-github.svg?branch=master)](https://travis-ci.org/FAOfao931013/react-redux-github)
+# React Redux Github [![Build Status](https://travis-ci.org/FAOfao931013/react-redux-github.svg?branch=master)](https://travis-ci.org/goumang2010/react-redux-github)
 
 ### 已启用yarn
 
