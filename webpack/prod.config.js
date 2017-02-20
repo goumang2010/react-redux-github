@@ -3,6 +3,8 @@ const WebpackConfig = require('webpack-config');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
+process.env.NODE_ENV = 'production';
+
 module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').merge({
     plugins: [
         new CleanWebpackPlugin(['dist'], {

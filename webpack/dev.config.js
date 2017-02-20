@@ -3,6 +3,8 @@ const WebpackConfig = require('webpack-config');
 const path = require('path');
 const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
+process.env.NODE_ENV = 'development';
+
 module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').merge({
     devtool: '#eval-source-map',
     plugins: [
