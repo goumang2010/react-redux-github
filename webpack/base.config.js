@@ -18,9 +18,6 @@ const paths = {
 };
 
 const config = {
-
-    devtool: 'inline-source-map',
-
     entry: {
         vendor: ['react', 'redux', 'react-dom', 'react-redux', 'react-router'],
     },
@@ -37,8 +34,7 @@ const config = {
             filename: 'index.html',
             template: './index/index.html'
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
     ],
 
     module: {

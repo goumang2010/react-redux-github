@@ -4,6 +4,7 @@ const path = require('path');
 
 module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').merge({
     plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             minimize: true
         }),

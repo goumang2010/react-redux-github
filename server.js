@@ -12,7 +12,7 @@ var compiler = webpack(config);
 app.use(express.static(path.join(__dirname, '/')));
 
 app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
+    noInfo: false,
     publicPath: config.output.publicPath
 }));
 

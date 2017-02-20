@@ -4,8 +4,9 @@ const path = require('path');
 const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').merge({
+    devtool: '#eval-source-map',
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
