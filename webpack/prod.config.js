@@ -1,9 +1,15 @@
 const webpack = require('webpack');
 const WebpackConfig = require('webpack-config');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').merge({
     plugins: [
+        new CleanWebpackPlugin(['dist'], {
+            root: path.join(__dirname, '../'),
+            verbose: true,
+            dry: false
+        }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             minimize: true
@@ -18,7 +24,7 @@ module.exports = new WebpackConfig.Config().extend('./webpack/base.config.js').m
             path.join(__dirname, '../src/entry.js')
         ],
     },
-    output:{
-       // publicPath:'https://faofao931013.github.io/react-redux-github/dist/'
+    output: {
+        // publicPath:'https://faofao931013.github.io/react-redux-github/dist/'
     }
 });
